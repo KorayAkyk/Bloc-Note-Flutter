@@ -12,8 +12,6 @@ import 'package:provider/provider.dart';
 import '../models/note.dart';
 import '../widgets/delete_popup.dart';
 import 'note_view_screen.dart';
-import 'package:get/get.dart';
-import '../helper/database_helper.dart';
 
 // ignore: use_key_in_widget_constructors
 class NoteEditScreen extends StatefulWidget {
@@ -59,8 +57,6 @@ class _NoteEditScreenState extends State {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => DatabaseHelper());
-
     return Scaffold(
       backgroundColor: white,
       appBar: AppBar(
@@ -217,17 +213,16 @@ class _NoteEditScreenState extends State {
 
     // ignore: unnecessary_null_comparison
     if (imageFile == null) return;
-    if (imageFile.path != null) {
-      File tmpFile = File(imageFile.path);
-      final appDir = await getApplicationDocumentsDirectory();
-      final fileName = basename(imageFile.path);
 
-      tmpFile = await tmpFile.copy('${appDir.path}/$fileName');
+    File tmpFile = File(imageFile.path);
+    final appDir = await getApplicationDocumentsDirectory();
+    final fileName = basename(imageFile.path);
 
-      setState(() {
-        _image = tmpFile;
-      });
-    }
+    tmpFile = await tmpFile.copy('${appDir.path}/$fileName');
+
+    setState(() {
+      _image = tmpFile;
+    });
   }
 
   void saveNote() {
@@ -242,7 +237,7 @@ class _NoteEditScreenState extends State {
     } else {
       int id = DateTime.now().millisecondsSinceEpoch;
       Provider.of<NoteProvider>(this.context, listen: false)
-          .addOrUpdateNote(id, title, content, imagePath ?? "", EditMode.ADD);
+          .addOrUpdateNote(id, title, content, imagePath!, EditMode.ADD);
       Navigator.of(this.context)
           .pushReplacementNamed(NoteViewScreen.route, arguments: id);
     }

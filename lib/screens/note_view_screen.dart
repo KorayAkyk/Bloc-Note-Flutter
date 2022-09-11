@@ -89,7 +89,7 @@ class _NoteViewScreenState extends State {
               ],
             ),
             // ignore: unnecessary_null_comparison
-            if (selectedNote!.imagePath != null)
+            if (selectedNote!.imagePath != "")
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Image.file(File(selectedNote!.imagePath)),

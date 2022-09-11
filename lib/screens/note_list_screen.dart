@@ -99,7 +99,7 @@ class NoteListScreen extends StatelessWidget {
   }
 
   _launchUrl() async {
-    const url = 'https://https://github.com/KorayAkyk/BlocNoteFlutter';
+    const url = 'https://github.com/KorayAkyk/Bloc-Note-Flutter';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
