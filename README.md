@@ -5,8 +5,8 @@ Une application de prise de note avec ajout d'image.
 
 ## CONFIGURATION
 
-flutter clean
-flutter package get
+#flutter clean
+#flutter package get
 
 flutter run --no-sound-null-safety
 
